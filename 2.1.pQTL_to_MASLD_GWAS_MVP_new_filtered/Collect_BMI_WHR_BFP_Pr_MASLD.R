@@ -4,7 +4,7 @@ suffix <- "_NCAN_UKBPPP_19_19215154_SharePro.txt"
 target_snp <- "chr19:19215154:G:T"
 p_threshold <- 5e-8  # genome-wide significance
 
-# 获取符合条件的文件名
+# List the candidate SharePro input files (exclude the MASLD outcome files)
 all_files <- list.files(pattern = paste0(".*", suffix, "$"))
 target_files <- all_files[!grepl("MASLD", all_files, fixed = FALSE)]
 
@@ -30,10 +30,10 @@ for (f in target_files) {
     next
   }
   
-  # 条件1: 文件中包含目标 SNP
+  # Criterion 1: the file contains the target lead SNP
   has_target_snp <- any(df$SNP == target_snp, na.rm = TRUE)
   
-  # 条件2: 文件中存在至少一个 P < 5e-8
+  # Criterion 2: the file contains at least one genome-wide significant variant
   has_significant_p <- any(df$P < p_threshold, na.rm = TRUE)
   
   if (has_target_snp && has_significant_p) {
@@ -49,7 +49,7 @@ for (f in target_files) {
   }
 }
 
-# 去重并输出
+# De-duplicate and write out
 results <- unique(results)
 output_file <- "Gene_Tissue_NCAN_UKBPPP.tsv"
 write.table(results, file = output_file, sep = "\t", quote = FALSE, row.names = FALSE)
