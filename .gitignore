@@ -1,0 +1,29 @@
+# R session leftovers
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+
+# never publish data or individual-level files
+*.tsv
+*.txt.gz
+*.gz
+*.ld
+*.bed
+*.bim
+*.fam
+*.vcf
+*.vcf.gz
+*.xlsx
+*.rds
+
+# logs / scratch
+logs/
+output/
+*.log
+*.o[0-9]*
+*.e[0-9]*
+
+# OS
+.DS_Store
+Thumbs.db
