@@ -63,9 +63,8 @@ UK Biobank Access Management System and cannot be redistributed here.
   re-derived from the full summary statistics (variants within &plusmn;1 Mb of the
   encoding gene, *P* < 5&times;10<sup>-8</sup>, LD-clumped at *r*<sup>2</sup> < 0.001
   within a 10-Mb window).
-- Obesity instruments were clumped against the 1000 Genomes Phase 3 European reference
-  panel; *cis*-pQTL clumping and the colocalization LD matrices used a European-ancestry
-  UK Biobank TOPMed-imputed reference panel.
+- Obesity instruments, *cis*-pQTL clumping and the colocalization LD matrices all used
+  the 1000 Genomes Project European reference panel.
 
 ## Software
 
