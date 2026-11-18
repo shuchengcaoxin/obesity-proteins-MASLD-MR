@@ -1,26 +1,26 @@
-# Proteome-wide Mendelian randomization across BMI, waist-to-hip ratio, and body fat percentage identifies distinct protein mediators of MASLD
+# Proteome-wide Mendelian randomization prioritizes proteins linking obesity traits with MASLD
 
 Analysis code accompanying the manuscript.
 
 > **Citation:** Cao S, Su C-Y, Tan D, Sasako T, Yoshiji S, Butler-Laporte G.
-> *Proteome-wide Mendelian randomization across BMI, waist-to-hip ratio, and body fat
-> percentage identifies distinct protein mediators of MASLD.* (under review)
+> *Proteome-wide Mendelian randomization prioritizes proteins linking obesity traits with MASLD.*
+> Manuscript in preparation.
 
 ---
 
 ## Overview
 
-We applied a two-step Mendelian randomization (MR) framework to identify circulating
-proteins that mediate the effect of adiposity on metabolic dysfunction-associated
-steatotic liver disease (MASLD):
+We applied a two-step Mendelian randomization (MR) framework to prioritize circulating
+proteins that link adiposity to metabolic dysfunction-associated steatotic liver
+disease (MASLD):
 
-1. **Step 1 MR** — effect of three obesity proxies (BMI, waist-to-hip ratio, body fat
-   percentage) on plasma protein levels, in two independent proteomic platforms
+1. **Step 1 MR:** effect of three obesity proxies (BMI, waist-to-hip ratio, body fat
+   percentage) on plasma protein levels, in two proteomic platforms
    (deCODE/SomaScan and UKB-PPP/Olink).
-2. **Reverse MR** — protein &rarr; obesity, to exclude reverse causation.
-3. **Step 2 MR** — effect of the resulting obesity-driven proteins on MASLD risk,
+2. **Reverse MR:** protein &rarr; obesity, to exclude reverse causation.
+3. **Step 2 MR:** effect of the resulting obesity-driven proteins on MASLD risk,
    using *cis*-pQTLs as instruments.
-4. **Colocalization** — SharePro, to test whether the protein and MASLD signals share
+4. **Colocalization:** SharePro, to test whether the protein and MASLD signals share
    a causal variant.
 
 ## Repository layout
@@ -34,12 +34,12 @@ steatotic liver disease (MASLD):
 | `3.colocalization/` | Preparation of SharePro input files for the colocalization analyses |
 
 Scripts are numbered in the order they were run. `.R` files are the analysis steps;
-`.sh` files are the corresponding HPC job submission scripts (PBS/SLURM).
+`.sh` files are the corresponding HPC job submission scripts.
 
 ## Data sources
 
-All analyses use publicly available summary statistics; no individual-level data are
-included in this repository.
+All analyses use publicly available GWAS summary statistics; no individual-level data
+were accessed, and no data are included in this repository.
 
 | Data | Source |
 |---|---|
@@ -51,18 +51,20 @@ included in this repository.
 | MASLD | Million Veteran Program |
 | eQTL | GTEx v8 |
 
-Individual-level UK Biobank genotype data were used only to build the linkage
-disequilibrium reference panel; they are available to approved researchers through the
-UK Biobank Access Management System and cannot be redistributed here.
+The only individual-level genotypes used are from the open-access 1000 Genomes Project
+European reference panel, for LD clumping and LD estimation.
 
 ## Notes on reproducing
 
 - Paths in the scripts point to the HPC directories on which the analyses were run and
   will need to be adapted.
-- *cis*-pQTL instruments were **not** taken from the original publications: they were
-  re-derived from the full summary statistics (variants within &plusmn;1 Mb of the
-  encoding gene, *P* < 5&times;10<sup>-8</sup>, LD-clumped at *r*<sup>2</sup> < 0.001
-  within a 10-Mb window).
+- *cis*-pQTL instruments were re-derived from the full summary statistics:
+  - deCODE: genome-wide significant variants (*P* < 5&times;10<sup>-8</sup>) within
+    &plusmn;1 Mb of the encoding gene's transcription start site, LD-clumped at
+    *r*<sup>2</sup> < 0.001 within a 10-Mb window.
+  - UKB-PPP: LD clumping per protein GWAS (*P* < 5&times;10<sup>-8</sup>,
+    *r*<sup>2</sup> < 0.001, 1-Mb window), then variants within &plusmn;500 kb of the
+    canonical transcription start site of the protein-coding gene.
 - Obesity instruments, *cis*-pQTL clumping and the colocalization LD matrices all used
   the 1000 Genomes Project European reference panel.
 
